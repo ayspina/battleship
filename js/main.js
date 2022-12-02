@@ -25,21 +25,21 @@ const $grinchShip5 = $('#grinch5');
 
 
 /*----- event listeners -----*/
-battlefield.addEventListener('click', function (e) {
+battlefield.addEventListener('click', function(e) {
     if (e.target.id.length < 4) {
-        idx = e.target.id[2] - 1;
+        idx = e.target.id[2];
     } else {
-        idx = (e.target.id[2] + e.target.id[3]) - 1;
+        idx = (e.target.id[2] + e.target.id[3]);
     };
-    console.log(idx); 
+    console.log(idx);
     // if (idx == ship1) {
-    //     console.log(`you sunk ship 1 at ${idx}`);
+    //     idx.innerHTML = '<div style="background: green"><div>';
     // } else {
     //     console.log ('try again');
     // };
     fireMissile();
     console.log(board);
-    // render();
+    render();
 });
 
 
@@ -113,15 +113,19 @@ placeShips();
 
 
 function render() {
-    board.forEach(function(cell, idx) {
-        const gridCell = document.getElementById('sq' + idx) - 1;
-        if (cell) {
-            gridCell.innerHTML = '-';
+    board.forEach(function(square, idx) {
+        const tdEl = document.getElementById('sq' + idx);
+        if (square == 'sink') {
+            tdEl.innerHTML = '<div style="background: green"><div>';
         } else {
-            gridCell.innerHTML = '';
+            tdEl.innerHTML = '<div></div>';
         }
     });
 };
+
+// function sinkShips() {
+
+// }
 
 // render();
 // shipChoice();
