@@ -1,4 +1,4 @@
-/*----- app's state (variables) -----*/
+
 let board = [null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
@@ -8,43 +8,13 @@ let board = [null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null];
 
-let fire, winner 
-/*----- constants -----*/
-const randomIdx = (Math.floor(Math.random() * board.length));
-console.log(randomIdx);
+let fire, winner, ship1, ship2, ship3, ship4, ship5
 
-const ships = {
-    ship1: {
-        location: board[randomIdx],
-        sunk: false,
-    },
-    
-    // ship2: {
-    //     location: board[shipChoice],
-    //     sunk: false,
-    // },
-    
-    // ship3: {
-    //     location: board[shipChoice],
-    //     sunk: false,
-    // },
-    
-    // ship4: {
-    //     location: board[shipChoice],
-    //     sunk: false,
-    // },
-
-    // ship5: {
-    //     location: board[shipChoice],
-    //     sunk: false,
-    // }
-};
+const randomShips = [];
 
 /*----- cached element references -----*/
 
 const battlefield = document.querySelector('tbody');
-
-
 const $buttonEl = $('button');
 const $grinchShip1 = $('#grinch1');
 const $grinchShip2 = $('#grinch2');
@@ -62,11 +32,11 @@ battlefield.addEventListener('click', function (e) {
         idx = (e.target.id[2] + e.target.id[3]) - 1;
     };
     console.log(idx); 
-    if (idx == randomIdx) {
-        console.log(`you sunk a ship at ${idx}`);
-    } else {
-        console.log ('try again');
-    };
+    // if (idx == ship1) {
+    //     console.log(`you sunk ship 1 at ${idx}`);
+    // } else {
+    //     console.log ('try again');
+    // };
     fireMissile();
     console.log(board);
     // render();
@@ -82,36 +52,64 @@ $buttonEl.on('click', function(e) {
     init();
 });
 
-// $('tbody').on('click', function(e){
-//     console.log(e.target.id);
-// });
+
 /*----- functions -----*/
 function init() {
-    // board = [null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null,
-    //     null, null, null, null, null, null, null, null];
+    board = [null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null,
+        null, null, null, null, null, null, null, null];
     winner = null;
-    // placeShips();
+    getRandomShips();
+    placeShips();
     // render();
 };
 
 function fireMissile() {
-    if (idx == randomIdx) {
-        // console.log(`you sunk a ship at ${idx}`);
+    if (idx == ship1) {
+        console.log(`you sunk ship1 at ${idx}`);
+        fire = 'sink';
+    } else if (idx == ship2) {
+        console.log(`you sunk ship2 at ${idx}`);
+        fire = 'sink';
+    } else if (idx == ship3) {
+        console.log(`you sunk ship3 at ${idx}`);
+        fire = 'sink';
+    } else if (idx == ship4) {
+        console.log(`you sunk ship4 at ${idx}`);
+        fire = 'sink';
+    } else if (idx == ship5) {
+        console.log(`you sunk ship5 at ${idx}`);
         fire = 'sink';
     } else {
-        // console.log ('try again');
+        console.log('try again');
         fire = 'miss';
     };
     board[idx] = fire;
 };
 
+function getRandomShips() {
+    for (let i = 0; i < 5; i++) {
+        randomShips.push(Math.floor(Math.random() * board.length));
+    };
+    console.log(randomShips);
+};
+getRandomShips();
+// console.log(randomShips[0]);
 
+function placeShips() {
+    ship1 = randomShips[0];
+    ship2 = randomShips[1];
+    ship3 = randomShips[2];
+    ship4 = randomShips[3];
+    ship5 = randomShips[4];
+};
+placeShips();
+// console.log(ship1);
 // function randomShip(board) {
 //   randomIdx = (Math.floor(Math.random() * board.length));
 //   ship = board[randomIdx];
@@ -123,7 +121,7 @@ function fireMissile() {
 //     ships.location = randomShip(board);
 //     console.log(randomShip(board));
 // };
-console.log(ships.ship1.location);
+// console.log(ships.ship1.location);
 // console.log(ships.ship2.location);
 // console.log(ships.ship3.location);
 // console.log(ships.ship4.location);
