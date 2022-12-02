@@ -117,6 +117,8 @@ function render() {
         const tdEl = document.getElementById('sq' + idx);
         if (square == 'sink') {
             tdEl.innerHTML = '<div style="background: green"><div>';
+        } else if (square == 'miss') {
+            tdEl.innerHTML = '<p><strong>-</strong></p>';
         } else {
             tdEl.innerHTML = '<div></div>';
         }
