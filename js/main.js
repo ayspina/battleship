@@ -109,34 +109,19 @@ function placeShips() {
     ship5 = randomShips[4];
 };
 placeShips();
-// console.log(ship1);
-// function randomShip(board) {
-//   randomIdx = (Math.floor(Math.random() * board.length));
-//   ship = board[randomIdx];
-//   console.log(randomIdx);
-//   return ship;  
-// };
 
-// function shipChoice() {
-//     ships.location = randomShip(board);
-//     console.log(randomShip(board));
-// };
-// console.log(ships.ship1.location);
-// console.log(ships.ship2.location);
-// console.log(ships.ship3.location);
-// console.log(ships.ship4.location);
-// console.log(ships.ship5.location);
 
-// function render() {
-//     board.forEach(function(cell, idx) {
-//         const gridCell = document.getElementById('sq' + idx) - 1;
-//         if (cell) {
-//             gridCell.innerHTML = '-';
-//         } else {
-//             gridCell.innerHTML = '';
-//         }
-//     });
-// };
+
+function render() {
+    board.forEach(function(cell, idx) {
+        const gridCell = document.getElementById('sq' + idx) - 1;
+        if (cell) {
+            gridCell.innerHTML = '-';
+        } else {
+            gridCell.innerHTML = '';
+        }
+    });
+};
 
 // render();
 // shipChoice();
