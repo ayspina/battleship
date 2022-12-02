@@ -1,3 +1,4 @@
+/*----- app's state (variables) -----*/
 let board = [null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
@@ -7,7 +8,7 @@ let board = [null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null];
 
-
+let fire, winner 
 /*----- constants -----*/
 const randomIdx = (Math.floor(Math.random() * board.length));
 console.log(randomIdx);
@@ -56,16 +57,19 @@ const $grinchShip5 = $('#grinch5');
 /*----- event listeners -----*/
 battlefield.addEventListener('click', function (e) {
     if (e.target.id.length < 4) {
-        idx = e.target.id[2];
+        idx = e.target.id[2] - 1;
     } else {
-        idx = e.target.id[2] + e.target.id[3];
+        idx = (e.target.id[2] + e.target.id[3]) - 1;
     };
-    console.log(idx);
-    if (board[idx] === ships.ship1.location) {
-        console.log(`you sunk a ship at ${board[idx]}`);
+    console.log(idx); 
+    if (idx == randomIdx) {
+        console.log(`you sunk a ship at ${idx}`);
     } else {
         console.log ('try again');
-    }
+    };
+    fireMissile();
+    console.log(board);
+    // render();
 });
 
 
@@ -96,6 +100,17 @@ function init() {
     // render();
 };
 
+function fireMissile() {
+    if (idx == randomIdx) {
+        // console.log(`you sunk a ship at ${idx}`);
+        fire = 'sink';
+    } else {
+        // console.log ('try again');
+        fire = 'miss';
+    };
+    board[idx] = fire;
+};
+
 
 // function randomShip(board) {
 //   randomIdx = (Math.floor(Math.random() * board.length));
@@ -117,7 +132,11 @@ console.log(ships.ship1.location);
 // function render() {
 //     board.forEach(function(cell, idx) {
 //         const gridCell = document.getElementById('sq' + idx) - 1;
-//         console.log(gridCell);
+//         if (cell) {
+//             gridCell.innerHTML = '-';
+//         } else {
+//             gridCell.innerHTML = '';
+//         }
 //     });
 // };
 
