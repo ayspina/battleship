@@ -73,18 +73,23 @@ function fireMissile() {
     if (idx == ship1) {
         console.log(`you sunk ship1 at ${idx}`);
         fire = 'sink';
+        $grinchShip1.css('background-color', 'black');
     } else if (idx == ship2) {
         console.log(`you sunk ship2 at ${idx}`);
         fire = 'sink';
+        $grinchShip2.css('background-color', 'black'); 
     } else if (idx == ship3) {
         console.log(`you sunk ship3 at ${idx}`);
         fire = 'sink';
+        $grinchShip3.css('background-color', 'black');
     } else if (idx == ship4) {
         console.log(`you sunk ship4 at ${idx}`);
         fire = 'sink';
+        $grinchShip4.css('background-color', 'black'); 
     } else if (idx == ship5) {
         console.log(`you sunk ship5 at ${idx}`);
         fire = 'sink';
+        $grinchShip5.css('background-color', 'black'); 
     } else {
         console.log('try again');
         fire = 'miss';
@@ -126,9 +131,6 @@ function render() {
     });
 };
 
-// function sinkShips() {
-
-// }
 
 // render();
 // shipChoice();
