@@ -116,7 +116,8 @@ function render() {
     board.forEach(function(square, idx) {
         const tdEl = document.getElementById('sq' + idx);
         if (square == 'sink') {
-            tdEl.innerHTML = '<div style="background: green"><div>';
+            // tdEl.innerHTML = '<div style="background: green"><div>';
+            tdEl.innerHTML = '<div class="sunk" style="background-image: url(https://lh3.googleusercontent.com/T_elNh_z4i_tfMwAhTU3rbK-Sx2mR4DC-3dAAbcsifbJ6VbxI31zrYJcCYtIiAmodHKN3kZzMIyWUvhvjAOZHnUNt2giTBWECAMRGCmJyDghkxdc6Fc2yzwSnqb0_Ige3gFEDO7N7zRqA_sllYXIj9jcWfdKMRTu8LpeBuAHE4MXiUdpvS0XNKDsHhUgi9OacIEyZkE5s7rpoADcF6568IAMsGKTahy6DRLuG86Iv216FfH9YNn-3U2wYJWtqm7oDJkmar2ot-MJIobLi2uDMHqFmfFSkK33fgbYo1IErOFaCSQsGEZrWFuLoB1I_9d6pWe5ZiwJjJuJJ6Jlg3zjT2mLOBZVsgi49IoyGrV0jhUGs0BdNcj24-YjR9ys65CHRiUKRqETgxhfNXewpmE9DQkSYsG59Z8ISF4UaHZdtMTVrb-I5mOxMnhOAlNHExhp0t4eBcMpXVMMrW9DSpccGup9MfKFMrowRwaVd2An3nBUVKId95AMjYAbV-iJFVA7Cqu1YoC8wcVLTmqa7yD1FZnnpZqDkRXQZu6rLVWo_19jIbiNalZDjrgY6NO9zOeP6iZ1MY3llqlfRD5BLrC2NHNuQNNYZfAwFtAu9-cJuq0OHMTNkVgbPfEl8Aphxfd6x9HzkpcZZgy5nfmBuzhAgAvNRzaULO0PUwiPl-WJR-E6wimou168X_HpzGG2cPBa4-P8Ax2Armhh1-I-tsiVLH5g6qVDty4JWBy0AMur55eO0x8Ipr9QxgkzwsAScY34wXDME7S58f35DfAcsNQQiPJXMYS-lBBtVpnAxs8oOB9K6phXgZ-ssT5OlTWQ8sjZLvlyIyeKPB0POYpH14hXoFApYyMO1H-2DTBfXjQnuw7wHMLWF8Wgyd5yjbo4GQEVVVA0M1eVfcFrrFj7gBvSUjm-vkky2qjy38Y8Dj6q2cNl=w213-h197-no?authuser=0)"></div>'
         } else if (square == 'miss') {
             tdEl.innerHTML = '<p><strong>-</strong></p>';
         } else {
