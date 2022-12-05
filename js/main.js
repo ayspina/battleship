@@ -16,17 +16,37 @@ const randomShips = [];
 
 /*----- cached element references -----*/
 
+const $startScreen = $('.start-game');
+const playBtn = document.querySelector('#play');
 const battlefield = document.querySelector('tbody');
 const timeEl = document.querySelector('.timer');
-const $buttonEl = $('button');
+const $buttonEl = $('#restart');
 const $grinchShip1 = $('#grinch1');
 const $grinchShip2 = $('#grinch2');
 const $grinchShip3 = $('#grinch3');
 const $grinchShip4 = $('#grinch4');
 const $grinchShip5 = $('#grinch5');
 
+$('.game-board').hide();
 
 /*----- event listeners -----*/
+playBtn.addEventListener('click', function(e) {
+    $startScreen.hide();
+    init();
+    setInterval(() => {
+        seconds--;
+        timeEl.innerHTML = `00:${seconds}`;
+        if (seconds <= 5) {
+            timeEl.style.color = 'red';
+        } 
+        if (seconds <= 0) {
+            timeEl.innerHTML = 'Time\'s Up!';
+        } 
+    
+    }, 1000);
+    
+});
+
 battlefield.addEventListener('click', function(e) {
     if (e.target.id.length < 4) {
         idx = e.target.id[2];
@@ -46,13 +66,14 @@ battlefield.addEventListener('click', function(e) {
 // });
 
 $buttonEl.on('click', function(e) {
-    init();
+    restartGame();
 });
 
 timeEl.innerHTML = `00:${seconds}`;
 
 /*----- functions -----*/
 function init() {
+    $('.game-board').show();
     board = [null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
@@ -129,15 +150,29 @@ function render() {
     });
 };
 
-const countdown = setInterval(() => {
-    seconds--;
-    timeEl.innerHTML = `00:${seconds}`;
-    if (seconds <= 0) {
-        timeEl.innerHTML = 'Time\'s Up!';
-    }
+function restartGame() {
+    $('.game-board').hide();
+    $startScreen.show();
+};
 
-},1000);
+// win/lose logic 
+// function endGame()
 
+// const countdown = setInterval(() => {
+//     seconds--;
+//     timeEl.innerHTML = `00:${seconds}`;
+//     if (seconds <= 5) {
+//         timeEl.style.color = 'red';
+//     } 
+//     if (seconds <= 0) {
+//         timeEl.innerHTML = 'Time\'s Up!';
+//     } 
+
+// }, 1000);
+
+// function startCountdown() {
+//     $startScreen.fadeOut();
+// }
 // render();
 // shipChoice();
 // console.log(ship1);
