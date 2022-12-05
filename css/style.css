@@ -130,7 +130,8 @@ h4 {
 .timer {
     grid-area: timer;
     font-family: 'Russo One', sans-serif;
-    margin-left: 30px;
+    font-size: 38px;
+    margin-left: 0;
 }
 
 .footer {

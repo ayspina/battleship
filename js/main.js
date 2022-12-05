@@ -12,6 +12,8 @@ let fire, winner, ship1, ship2, ship3, ship4, ship5
 
 let seconds = 30;
 
+let sunkenShips = null;
+
 const randomShips = [];
 
 /*----- cached element references -----*/
@@ -41,6 +43,7 @@ playBtn.addEventListener('click', function(e) {
         } 
         if (seconds <= 0) {
             timeEl.innerHTML = 'Time\'s Up!';
+            // clearInterval(seconds);
         } 
     
     }, 1000);
@@ -57,6 +60,7 @@ battlefield.addEventListener('click', function(e) {
     fireMissile();
     console.log(board);
     render();
+    checkWin();
 });
 
 
@@ -66,6 +70,7 @@ battlefield.addEventListener('click', function(e) {
 // });
 
 $buttonEl.on('click', function(e) {
+    init();
     restartGame();
 });
 
@@ -156,8 +161,25 @@ function restartGame() {
 };
 
 // win/lose logic 
-// function endGame()
+function countShips() {
+   sunkenShips = board.filter(function(idx) {
+        return idx == 'sink';
+    }).length    
+};
 
+function checkWin() { 
+    countShips();
+    if (sunkenShips === 5 && seconds > 0) {
+        $('.grinch-grid').fadeOut();
+        $('aside').fadeOut();
+        $('body').innerHTML = '<h1>YOU SAVED CHRISTMAS!</h1>'
+        console.log(`Winner! you sunk ${sunkenShips} out of 5 ships!`)
+    } else if (sunkenShips < 5 && seconds === 0) {
+        console.log('You definitely lost');
+    } else {
+        console.log('Perhaps a win? Perhaps a loss?')
+    }
+};
 // const countdown = setInterval(() => {
 //     seconds--;
 //     timeEl.innerHTML = `00:${seconds}`;
