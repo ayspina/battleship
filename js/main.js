@@ -10,18 +10,20 @@ let board = [null, null, null, null, null, null, null, null,
 
 let fire, winner, ship1, ship2, ship3, ship4, ship5
 
+let seconds = 30;
+
 const randomShips = [];
 
 /*----- cached element references -----*/
 
 const battlefield = document.querySelector('tbody');
+const timeEl = document.querySelector('.timer');
 const $buttonEl = $('button');
 const $grinchShip1 = $('#grinch1');
 const $grinchShip2 = $('#grinch2');
 const $grinchShip3 = $('#grinch3');
 const $grinchShip4 = $('#grinch4');
 const $grinchShip5 = $('#grinch5');
-
 
 
 /*----- event listeners -----*/
@@ -32,11 +34,6 @@ battlefield.addEventListener('click', function(e) {
         idx = (e.target.id[2] + e.target.id[3]);
     };
     console.log(idx);
-    // if (idx == ship1) {
-    //     idx.innerHTML = '<div style="background: green"><div>';
-    // } else {
-    //     console.log ('try again');
-    // };
     fireMissile();
     console.log(board);
     render();
@@ -44,14 +41,15 @@ battlefield.addEventListener('click', function(e) {
 
 
 
-$grinchShip1.on('click', function(e) {
-    $grinchShip1.fadeOut();
-});
+// $grinchShip1.on('click', function(e) {
+//     $grinchShip1.fadeOut();
+// });
 
 $buttonEl.on('click', function(e) {
     init();
 });
 
+timeEl.innerHTML = `00:${seconds}`;
 
 /*----- functions -----*/
 function init() {
@@ -131,6 +129,14 @@ function render() {
     });
 };
 
+const countdown = setInterval(() => {
+    seconds--;
+    timeEl.innerHTML = `00:${seconds}`;
+    if (seconds <= 0) {
+        timeEl.innerHTML = 'Time\'s Up!';
+    }
+
+},1000);
 
 // render();
 // shipChoice();
