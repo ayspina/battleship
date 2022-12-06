@@ -89,14 +89,15 @@ table {
     width: 400px;
     border: 1px solid black;
     margin-left: auto;
-    margin-right: 80px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-right: 230px;
+    /* margin-top: 20px;
+    margin-bottom: 20px; */  
     border-collapse: collapse;
     table-layout: fixed;
     background-image: url(https://lh3.googleusercontent.com/pw/AL9nZEVysPjzZt3aHenUEZ63oaX86C2bpXcxgd_xCOwd9QjMeahy7R5KkDTEXb8oehEVOc7kUVLiRtYlyJBCfvgPg608qu6vuMq1A0mh4HpehQGSbYcqBRRlHuj_br7hiNrJOqs2odT-WX8KQx0_K_ShIUyJZI3izKnhBvlfl-2I28avnGYhzf_NJcwsupr7DslOzR8-dh80B82j9D6TBz77I-PBl6_aFl4lozJT9TlnIu64dj_LhW10E-NHTn0Cib_becDpOEf4izmwf5U44JxyCOKHmxeFRWXMDBa12A8_WIuYm0CayDFaYAXwVXnFZOu4PA6SEgVRBqVypagttFl-xfAlpqtPUFNGdTopXHojVAxBT6hajebduuqlNFjulYRrdiYFpBRWt2DFu_qG86qa8GALa57iDs2zrDAEsR4mXkYwkOIzDgujUed4ANo6_OqGAsKhVEP-iFVgtOiAcNktPqdCvD9rBnlx1P21kghPtAcKAjSI5RXNXOfCd0mwvBk78ozH8A4_DitLsvcdVig93vBsoA0El2SboqKsG5rXJSsUXE6bDS8uCSElG0lSysrovMrkI2SjqO65I_j6kzweDqCB-dBGDq0MIBV_6wmFNI5LF-Fk1-YUqDYBeOwiUgTS5NIq4SbharySsgxeYtweO70c3aqoF9FPDKETPRMSrrTvLaDQZ0s8MdTeGGMihc6haPzWtmY5UIOuNXQOarsUsAR3pFnvjz_KrhGWpcRb7MU1rGHDr6s-R442Ond24-xPbeiDYRZL7BILI2hudhPHrETJ_sDBsZkgIrSwK80OaFWcD5erGGC1X0MMfFs72LG7hvr2_CYHo-Cp3HH_aV7wjz4Jo8kF_ZRtGQ4_c5SCDmtcQXUa0Hb5Kzga1xR3-Et_BWS6PjF3D3791X5qKqPK4A=w359-h294-no?authuser=0);
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: auto;
 }
 
 tr td {
@@ -130,7 +131,9 @@ h4 {
 .footer {
     grid-area: footer;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
     height: 200px;
     margin-top: 0;
 }
@@ -138,16 +141,16 @@ h4 {
 .timer {
     font-family: 'Russo One', sans-serif;
     font-size: 38px;
-    margin-left: 0;
     margin-top: 0;
+    margin-bottom: 20px;
 }
 
 #restart {
     font-family: 'Russo One', sans-serif;
     color: white;
     background-color: red;
-    margin-top: -40px;
-    margin-bottom: 20px;
+    /* margin-top: -40px;
+    margin-bottom: 20px; */
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -176,3 +179,27 @@ td .sunk {
     justify-content: center;
     align-items: center;
 }
+
+@media screen and (min-width: 1200px ) {
+    table {
+        margin-right: 60px;
+    }
+}
+
+@media screen and (min-width: 1400px ) {
+    table {
+        margin-right: 100px;
+    }
+}
+
+@media screen and (min-width: 1600px ) {
+    table {
+        margin-right: 140px;
+    } 
+ }
+
+@media screen and (min-width: 1800px ) {
+    table {
+        margin-right: 220px;
+    } 
+ }

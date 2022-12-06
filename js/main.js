@@ -18,11 +18,12 @@ const randomShips = [];
 
 /*----- cached element references -----*/
 
-const $startScreen = $('.start-game');
+
 const boardEL = document.querySelector('.game-board');
 const playBtn = document.querySelector('#play');
 const battlefield = document.querySelector('tbody');
 const timeEl = document.querySelector('.timer');
+const $startScreen = $('.start-game');
 const $buttonEl = $('#restart');
 const $grinchShip1 = $('#grinch1');
 const $grinchShip2 = $('#grinch2');
@@ -64,12 +65,6 @@ battlefield.addEventListener('click', function(e) {
     
 });
 
-
-
-// $grinchShip1.on('click', function(e) {
-//     $grinchShip1.fadeOut();
-// });
-
 $buttonEl.on('click', function(e) {
     init();
     restartGame();
@@ -91,7 +86,6 @@ function init() {
     winner = null;
     getRandomShips();
     placeShips();
-    // render();
 };
 
 function fireMissile() {
@@ -143,9 +137,6 @@ placeShips();
 
 
 function render() {
-    // if (winner) {
-    //     clearInterval(countdown);
-    // }
     board.forEach(function(square, idx) {
         const tdEl = document.getElementById('sq' + idx);
         if (square == 'sink') {
@@ -160,11 +151,11 @@ function render() {
 };
 
 function restartGame() {
+    init();
     $('.game-board').hide();
     $startScreen.show();
 };
 
-// win/lose logic 
 function countShips() {
    sunkenShips = board.filter(function(idx) {
         return idx == 'sink';
@@ -178,10 +169,7 @@ function checkWin() {
         $('.grinch-grid').fadeOut();
         $('aside').fadeOut();
         timeEl.innerHTML = 'You saved Christmas!';
-       } else if (sunkenShips < 5 && seconds === 0) {
-        timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
+    //    } else if (sunkenShips < 5 && seconds === 0) {
+    //     timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
        }
 };
-
-
-
