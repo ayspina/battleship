@@ -8,7 +8,7 @@ let board = [null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null,
     null, null, null, null, null, null, null, null];
 
-let fire, winner, ship1, ship2, ship3, ship4, ship5
+let fire, winner, countdown, ship1, ship2, ship3, ship4, ship5
 
 let seconds = 30;
 
@@ -19,6 +19,7 @@ const randomShips = [];
 /*----- cached element references -----*/
 
 const $startScreen = $('.start-game');
+const boardEL = document.querySelector('.game-board');
 const playBtn = document.querySelector('#play');
 const battlefield = document.querySelector('tbody');
 const timeEl = document.querySelector('.timer');
@@ -35,15 +36,14 @@ $('.game-board').hide();
 playBtn.addEventListener('click', function(e) {
     $startScreen.hide();
     init();
-    setInterval(() => {
+    countdown = setInterval(() => {
         seconds--;
         timeEl.innerHTML = `00:${seconds}`;
         if (seconds <= 5) {
             timeEl.style.color = 'red';
         } 
         if (seconds <= 0) {
-            timeEl.innerHTML = 'Time\'s Up!';
-            // clearInterval(seconds);
+            timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
         } 
     
     }, 1000);
@@ -61,6 +61,7 @@ battlefield.addEventListener('click', function(e) {
     console.log(board);
     render();
     checkWin();
+    
 });
 
 
@@ -142,6 +143,9 @@ placeShips();
 
 
 function render() {
+    // if (winner) {
+    //     clearInterval(countdown);
+    // }
     board.forEach(function(square, idx) {
         const tdEl = document.getElementById('sq' + idx);
         if (square == 'sink') {
@@ -169,32 +173,15 @@ function countShips() {
 
 function checkWin() { 
     countShips();
-    if (sunkenShips === 5 && seconds > 0) {
+       if (sunkenShips === 5 && seconds > 0) {
+        clearInterval(countdown);
         $('.grinch-grid').fadeOut();
         $('aside').fadeOut();
-        $('body').innerHTML = '<h1>YOU SAVED CHRISTMAS!</h1>'
-        console.log(`Winner! you sunk ${sunkenShips} out of 5 ships!`)
-    } else if (sunkenShips < 5 && seconds === 0) {
-        console.log('You definitely lost');
-    } else {
-        console.log('Perhaps a win? Perhaps a loss?')
-    }
+        timeEl.innerHTML = 'You saved Christmas!';
+       } else if (sunkenShips < 5 && seconds === 0) {
+        timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
+       }
 };
-// const countdown = setInterval(() => {
-//     seconds--;
-//     timeEl.innerHTML = `00:${seconds}`;
-//     if (seconds <= 5) {
-//         timeEl.style.color = 'red';
-//     } 
-//     if (seconds <= 0) {
-//         timeEl.innerHTML = 'Time\'s Up!';
-//     } 
 
-// }, 1000);
 
-// function startCountdown() {
-//     $startScreen.fadeOut();
-// }
-// render();
-// shipChoice();
-// console.log(ship1);
+
