@@ -1,12 +1,13 @@
 
-let board = [null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null,
-    null, null, null, null, null, null, null, null];
+let board
+// = [null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null,
+//     null, null, null, null, null, null, null, null];
 
 let fire, winner, countdown, ship1, ship2, ship3, ship4, ship5
 
@@ -31,27 +32,30 @@ const $grinchShip3 = $('#grinch3');
 const $grinchShip4 = $('#grinch4');
 const $grinchShip5 = $('#grinch5');
 
-$('.game-board').hide();
 
+$('.game-board').hide();
 /*----- event listeners -----*/
-playBtn.addEventListener('click', function(e) {
+playBtn.addEventListener('click', function (e) {
     $startScreen.hide();
+    $('.game-board').show();
     init();
     countdown = setInterval(() => {
         seconds--;
         timeEl.innerHTML = `00:${seconds}`;
         if (seconds <= 5) {
             timeEl.style.color = 'red';
-        } 
+        }
         if (seconds <= 0) {
+            $('.grinch-grid').fadeOut();
+            $('aside').fadeOut();
             timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
-        } 
-    
+        }
+
     }, 1000);
-    
+
 });
 
-battlefield.addEventListener('click', function(e) {
+battlefield.addEventListener('click', function (e) {
     if (e.target.id.length < 4) {
         idx = e.target.id[2];
     } else {
@@ -62,19 +66,13 @@ battlefield.addEventListener('click', function(e) {
     console.log(board);
     render();
     checkWin();
-    
+
 });
 
-$buttonEl.on('click', function(e) {
-    init();
-    restartGame();
-});
-
-timeEl.innerHTML = `00:${seconds}`;
+$buttonEl.on('click', restartGame);
 
 /*----- functions -----*/
 function init() {
-    $('.game-board').show();
     board = [null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
@@ -83,7 +81,6 @@ function init() {
         null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null,
         null, null, null, null, null, null, null, null];
-    winner = null;
     getRandomShips();
     placeShips();
 };
@@ -96,7 +93,7 @@ function fireMissile() {
     } else if (idx == ship2) {
         console.log(`you sunk ship2 at ${idx}`);
         fire = 'sink';
-        $grinchShip2.css('background-color', 'black'); 
+        $grinchShip2.css('background-color', 'black');
     } else if (idx == ship3) {
         console.log(`you sunk ship3 at ${idx}`);
         fire = 'sink';
@@ -104,11 +101,11 @@ function fireMissile() {
     } else if (idx == ship4) {
         console.log(`you sunk ship4 at ${idx}`);
         fire = 'sink';
-        $grinchShip4.css('background-color', 'black'); 
+        $grinchShip4.css('background-color', 'black');
     } else if (idx == ship5) {
         console.log(`you sunk ship5 at ${idx}`);
         fire = 'sink';
-        $grinchShip5.css('background-color', 'black'); 
+        $grinchShip5.css('background-color', 'black');
     } else {
         console.log('try again');
         fire = 'miss';
@@ -122,8 +119,6 @@ function getRandomShips() {
     };
     console.log(randomShips);
 };
-getRandomShips();
-// console.log(randomShips[0]);
 
 function placeShips() {
     ship1 = randomShips[0];
@@ -132,12 +127,9 @@ function placeShips() {
     ship4 = randomShips[3];
     ship5 = randomShips[4];
 };
-placeShips();
-
-
 
 function render() {
-    board.forEach(function(square, idx) {
+    board.forEach(function (square, idx) {
         const tdEl = document.getElementById('sq' + idx);
         if (square == 'sink') {
             // tdEl.innerHTML = '<div style="background: green"><div>';
@@ -151,25 +143,68 @@ function render() {
 };
 
 function restartGame() {
-    init();
+    // console.log('Hello world');
+    stopTimer();
+    resetTimer();
+    resetBoard();
     $('.game-board').hide();
     $startScreen.show();
 };
 
 function countShips() {
-   sunkenShips = board.filter(function(idx) {
+    sunkenShips = board.filter(function (idx) {
         return idx == 'sink';
-    }).length    
+    }).length
 };
 
-function checkWin() { 
+function checkWin() {
     countShips();
-       if (sunkenShips === 5 && seconds > 0) {
+    if (sunkenShips === 5 && seconds > 0) {
         clearInterval(countdown);
         $('.grinch-grid').fadeOut();
         $('aside').fadeOut();
         timeEl.innerHTML = 'You saved Christmas!';
-    //    } else if (sunkenShips < 5 && seconds === 0) {
-    //     timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
-       }
+        //    } else if (sunkenShips < 5 && seconds === 0) {
+        //     timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
+    }
+};
+
+// function startTimer() {
+//     countdown = setInterval(() => {
+//         seconds--;
+//         timeEl.innerHTML = `00:${seconds}`;
+//         if (seconds <= 5) {
+//             timeEl.style.color = 'red';
+//         } 
+//         if (seconds <= 0) {
+//             timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
+//         } 
+
+//     }, 1000);
+// };
+
+function stopTimer() {
+    clearInterval(countdown);
+};
+
+function resetTimer() {
+    seconds = 30;
+    timeEl.innerHTML = `00:${seconds}`;
+    timeEl.style.color = 'black';
+}
+
+function resetBoard() {
+    board.forEach(function (square, idx) {
+        const tdEl = document.getElementById('sq' + idx);
+        if (square) {
+            tdEl.innerHTML = '<p><strong></strong></p>';
+        }
+    });
+    $grinchShip1.css('background-color', 'white');
+    $grinchShip2.css('background-color', 'white');
+    $grinchShip3.css('background-color', 'white');
+    $grinchShip4.css('background-color', 'white');
+    $grinchShip5.css('background-color', 'white');
+    $('.grinch-grid').fadeIn();
+    $('aside').fadeIn();
 };
