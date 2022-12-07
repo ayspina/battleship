@@ -34,19 +34,8 @@ playBtn.addEventListener('click', function (e) {
     init();
     countdown = setInterval(() => {
         seconds--;
-        timeEl.innerHTML = `00:${seconds}`;
-        if (seconds < 10) {
-            timeEl.innerHTML = `00:0${seconds}`;
-        }
-        if (seconds <= 5) {
-            timeEl.style.color = 'red';
-        }
-        if (seconds <= 0) {
-            $('.grinch-grid').fadeOut();
-            $('aside').fadeOut();
-            timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
-        }
-
+        timeDisplay();
+        
     }, 1000);
 
 });
@@ -180,4 +169,19 @@ function resetBoard() {
     $grinchShip5.css('background-color', 'white');
     $('.grinch-grid').fadeIn();
     $('aside').fadeIn();
+};
+
+function timeDisplay() {
+    timeEl.innerHTML = `00:${seconds}`;
+    if (seconds < 10) {
+        timeEl.innerHTML = `00:0${seconds}`;
+    }
+    if (seconds <= 5) {
+        timeEl.style.color = 'red';
+    }
+    if (seconds <= 0) {
+        $('.grinch-grid').fadeOut();
+        $('aside').fadeOut();
+        timeEl.innerHTML = 'The Grinch prevails! Better luck next year...';
+    }
 };
