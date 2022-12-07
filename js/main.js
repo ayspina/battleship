@@ -47,9 +47,7 @@ battlefield.addEventListener('click', function (e) {
     } else {
         idx = (e.target.id[2] + e.target.id[3]);
     };
-    console.log(idx);
     fireMissile();
-    console.log(board);
     render();
     checkWin();
 
